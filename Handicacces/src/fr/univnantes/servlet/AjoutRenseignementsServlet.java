@@ -42,7 +42,8 @@ public class AjoutRenseignementsServlet extends HttpServlet {
 			ObjectifyService.ofy();
 			
 			//Crée l'objet Website à partir de l'url
-			String url = req.getRequestURL().toString();
+			String url = req.getParameter("url");
+			//String url = req.getRequestURL().toString();
 
 
 			//Crée les aménagements renseignés par l'utilisateur

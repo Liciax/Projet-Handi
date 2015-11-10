@@ -1,10 +1,16 @@
 <ul id="formulaire" ng-controller="AmenagementsController as plugin">
      <form method="post" action="/ajout"/>
+     
+     	<li><label for="url">URL du site a annoter</label></li>
+     	<li><input type="text" name="url" id="url"></li>
+     
     	<li ng-repeat="amenagement in plugin.amenagements.items">
 			<input name="nom" type="checkbox" value="{{amenagement.name}}">
         	<label for="nom">{{amenagement.name}}</label>
 			<a href="" class="help" title="{{amenagement.description}}">?</a>
-		</li>    
+		</li>  
+		  
 		<li><input type="submit" name="Submit" value="Valider" id="valider"></li>
+		
     </form>
 </ul>

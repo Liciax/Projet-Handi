@@ -27,22 +27,6 @@
   "ownerName" : "unantes.fr",
   "packagePath" : "bean",
   "methods" : {
-    "websiteendpoint.updateWebsite" : {
-      "path" : "website",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.api.WebsiteEndpoint.updateWebsite",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "websiteendpoint.getWebsite" : {
       "path" : "website/{id}",
       "httpMethod" : "GET",
@@ -64,26 +48,33 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "websiteendpoint.listWebsite" : {
+    "websiteendpoint.insertWebsite" : {
       "path" : "website",
-      "httpMethod" : "GET",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.api.WebsiteEndpoint.listWebsite",
+      "rosyMethod" : "fr.unantes.api.WebsiteEndpoint.insertWebsite",
       "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "limit" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "websiteendpoint.updateWebsite" : {
+      "path" : "website",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "fr.unantes.api.WebsiteEndpoint.updateWebsite",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -110,17 +101,26 @@
         "body" : "empty"
       }
     },
-    "websiteendpoint.insertWebsite" : {
+    "websiteendpoint.listWebsite" : {
       "path" : "website",
-      "httpMethod" : "POST",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.api.WebsiteEndpoint.insertWebsite",
+      "rosyMethod" : "fr.unantes.api.WebsiteEndpoint.listWebsite",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -165,6 +165,19 @@
       }
     },
     "methods" : {
+      "fr.unantes.api.WebsiteEndpoint.getWebsite" : {
+        "response" : {
+          "$ref" : "Website"
+        }
+      },
+      "fr.unantes.api.WebsiteEndpoint.insertWebsite" : {
+        "request" : {
+          "$ref" : "Website"
+        },
+        "response" : {
+          "$ref" : "Website"
+        }
+      },
       "fr.unantes.api.WebsiteEndpoint.updateWebsite" : {
         "request" : {
           "$ref" : "Website"
@@ -173,24 +186,11 @@
           "$ref" : "Website"
         }
       },
-      "fr.unantes.api.WebsiteEndpoint.getWebsite" : {
-        "response" : {
-          "$ref" : "Website"
-        }
+      "fr.unantes.api.WebsiteEndpoint.removeWebsite" : {
       },
       "fr.unantes.api.WebsiteEndpoint.listWebsite" : {
         "response" : {
           "$ref" : "CollectionResponse_Website"
-        }
-      },
-      "fr.unantes.api.WebsiteEndpoint.removeWebsite" : {
-      },
-      "fr.unantes.api.WebsiteEndpoint.insertWebsite" : {
-        "request" : {
-          "$ref" : "Website"
-        },
-        "response" : {
-          "$ref" : "Website"
         }
       }
     }
