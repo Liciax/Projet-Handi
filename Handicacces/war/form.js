@@ -70,7 +70,7 @@ function affichage(){
 		
 		$scope.affresult = function(){
 			var temp = $scope.p1;
-			$http.get('http://testalihandicacces.appspot.com//request?p1=' + temp + '&start=0' ).success(function(response) {
+			$http.get('http://handicacces.appspot.com//requete?p1=' + temp + '&start=0' ).success(function(response) {
 				var json = response; 
 //				$scope.item = json.response;
 //				$scope.next = json.nextpage;
@@ -83,7 +83,7 @@ function affichage(){
 		$scope.nextpage = function(){
 			var temp = $scope.p1;
 			var page = $scope.next;
-			$http.get('http://testalihandicacces.appspot.com//request?p1=' + temp + '&start=' + page).success(function(response) {
+			$http.get('http://handicacces.appspot.com//requete?p1=' + temp + '&start=' + page).success(function(response) {
 				var json = response; 
 //				$scope.item = json.response;
 //				$scope.next = json.nextpage;
@@ -98,7 +98,7 @@ function affichage(){
 			if($scope.back >= 0) {
 				var temp = $scope.p1;
 				var page = $scope.back;
-				$http.get('http://testalihandicacces.appspot.com//request?p1=' + temp + '&start=' + page).success(function(response) {
+				$http.get('http://handicacces.appspot.com//requete?p1=' + temp + '&start=' + page).success(function(response) {
 					var json = response; 
 //					$scope.item = json.response;
 //					$scope.next = json.nextpage;
@@ -122,7 +122,7 @@ affichage();
 
 //var jsonfinal = this.item;
 //var http = new XMLHttpRequest();
-//var url = 'http://bustling-day-111011.appspot.com/request?p1=' + temp;
+//var url = 'http://bustling-day-111011.appspot.com/requete?p1=' + temp;
 //http.open("GET", url, true);
 //
 //
