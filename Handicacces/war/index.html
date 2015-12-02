@@ -6,7 +6,7 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	
   	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-	<script type="text/javascript" src="form.js"></script>
+	  <script type="text/javascript" src="form.js"></script>
 
     <title>Handicacces</title>
 
@@ -78,34 +78,38 @@
 <!-- 		        <h2>{{result.url}}</h2> -->
 		        <p>{{result.content}}</p>
 		        <p>infos en plus:</p>
-		        <div ng-repeat="info in result.resp.equipement">
-		        {{info.nom}}
-		        </div>
+		        
+		        
 		        <!-- -------------------------------------------------------------------------- -->
-		        <li>
-					<div ng-class="{active:resultat.isSelected(result)}"> 
-						<a href ng-click="resultat.selectTab(result)" class="ajout">ajouter des infos?</a> 
-					</div>
+		        <div class="annotations" >
+		        	<ul>
+		        		<li ng-repeat="info in result.resp.equipement">{{info.nom}}</li>
+		       			<li>
+							<div ng-class="{active:resultat.isSelected(result)}"> 
+								<a href ng-click="resultat.selectTab(result)" class="ajout"><img src="images/add.png" class="add_more"></a> 
+							</div>
 					
-					<!-- Le formulaire de renseignements -->
-					<div id="plugin" ng-show="resultat.isSelected(result)">
-						<header>
-							<p id="description">Quels sont les aménagements prévus pour les handicapés?</p>
-							<img src="images/logo.png" id="logo"> </header>
-						<ul id="formulaire" >
-							<form>
-								<li ng-repeat="amenagement in resultat.amenagements">
-									<input type="checkbox" ng-model="amenagement.checked">
-									<span ng-model="amenagement.nom">{{amenagement.nom}}</span> <a href="" class="help" onClick="">?</a> </li>
-								<li>
-									<input type="submit" name="Submit" value="Valider" id="valider" ng-click="renseigner(result,resultat.amenagements)">
-								</li>
-							</form>
-						</ul>
-					</div>
-					<!-- Fin du formulaire de renseignement --> 
+							<!-- Le formulaire de renseignements -->
+							<div id="plugin" ng-show="resultat.isSelected(result)">
+								<header>
+									<p id="description">Quels sont les aménagements prévus pour les handicapés?</p>
+									<img src="images/logo.png" id="logo"> </header>
+								<ul id="formulaire" >
+									<form>
+										<li ng-repeat="amenagement in resultat.amenagements">
+											<input type="checkbox" ng-model="amenagement.checked">
+											<span ng-model="amenagement.nom">{{amenagement.nom}}</span> <a href="" class="help" title="{{amenagement.description}}">?</a> </li>
+										<li>
+											<input type="submit" name="Submit" value="Valider" id="valider" ng-click="renseigner(result,resultat.amenagements)">
+										</li>
+									</form>
+								</ul>
+							</div>
+							<!-- Fin du formulaire de renseignement --> 
 					
-				</li>
+						</li>
+					</ul>
+		        </div>
 	        	<!-- -------------------------------------------------------------------------- -->
 <!-- 	        <div ng-repeat="result in item"> -->
 <!-- 		        <h1>{{result.titleNoFormatting}}</h1> -->
