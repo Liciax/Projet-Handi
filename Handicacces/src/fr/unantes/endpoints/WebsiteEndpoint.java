@@ -7,7 +7,7 @@ import com.google.api.server.spi.response.BadRequestException;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.datastore.Cursor;
-import com.google.appengine.datanucleus.query.JDOCursorHelper;
+//import com.google.appengine.datanucleus.query.JDOCursorHelper;
 import com.googlecode.objectify.NotFoundException;
 
 import fr.unantes.beans.Amenagement;

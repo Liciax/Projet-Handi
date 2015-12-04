@@ -14,8 +14,6 @@ function (a) {
 
 
 
-
-
 function affichage(){
 	var app = angular.module('app.search',[]);
 	app.controller("ResultController", function($scope,$http){
@@ -30,21 +28,21 @@ function affichage(){
 		   
 		$scope.renseigner = function(website,amenagements) {
 
-			   console.log(website.titleNoFormatting);
-			   console.log(amenagements);
-			   var newAmenagements = amenagements;
-			   console.log(newAmenagements);
-			            //website.amenagements = [];
-			   angular.forEach(newAmenagements, function(amenagement) {
-			   console.log(amenagement.nom);
-			   console.log(amenagement.checked);
-			   if (amenagement.checked){
-				   console.log("yay");
-				   console.log(website.titleNoFormatting)
-				   website.resp.equipement.push(amenagement);
-				   //website.utilisateurs.push({nom:'geof', annote:true})
-			   } 
-			   });
+			console.log(website.titleNoFormatting);
+			console.log(amenagements);
+			var newAmenagements = amenagements;
+			console.log(newAmenagements);
+		          //website.amenagements = [];
+			angular.forEach(newAmenagements, function(amenagement) {
+				console.log(amenagement.nom);
+				console.log(amenagement.checked);
+				if (amenagement.checked){
+					console.log("yay");
+				console.log(website.titleNoFormatting)
+				website.resp.equipement.push(amenagement);
+				//website.utilisateurs.push({nom:'geof', annote:true})
+				} 
+			});
 		};
   
 
@@ -70,41 +68,38 @@ function affichage(){
 		
 		$scope.affresult = function(){
 			var temp = $scope.p1;
-			$http.get('http://handicacces.appspot.com//requete?p1=' + temp + '&start=0' ).success(function(response) {
+			$http.get('http://handicacces.appspot.com/requete?p1=' + temp + '&start=1' ).success(function(response) {
 				var json = response; 
 //				$scope.item = json.response;
 //				$scope.next = json.nextpage;
-				$scope.item = json.responseData.results;
-				$scope.next = json.nextpage;
-				$scope.back = json.lastpage;
+				$scope.item = json.items;
+				$scope.next = json.queries;
 			});
 		};
 		
 		$scope.nextpage = function(){
 			var temp = $scope.p1;
-			var page = $scope.next;
-			$http.get('http://handicacces.appspot.com//requete?p1=' + temp + '&start=' + page).success(function(response) {
+			var page = $scope.next.nextPage[0].startIndex;
+			$http.get('http://handicacces.appspot.com/requete?p1=' + temp + '&start=' + page).success(function(response) {
 				var json = response; 
 //				$scope.item = json.response;
 //				$scope.next = json.nextpage;
-				$scope.item = json.responseData.results;
-				$scope.next = json.nextpage;
-				$scope.back = json.lastpage;
+				$scope.item = json.items;
+				$scope.next = json.queries;
 				
 			});
 		};
 		
 		$scope.lastpage = function(){
-			if($scope.back >= 0) {
+			if($scope.next.nextPage[0].startIndex >= 11) {
 				var temp = $scope.p1;
-				var page = $scope.back;
-				$http.get('http://handicacces.appspot.com//requete?p1=' + temp + '&start=' + page).success(function(response) {
+				var page = $scope.next.previousPage[0].startIndex;
+				$http.get('http://handicacces.appspot.com/requete?p1=' + temp + '&start=' + page).success(function(response) {
 					var json = response; 
 //					$scope.item = json.response;
 //					$scope.next = json.nextpage;
-					$scope.item = json.responseData.results;
-					$scope.next = json.nextpage;
-					$scope.back = json.lastpage;
+					$scope.item = json.items;
+					$scope.next = json.queries;
 					
 				});
 			}
@@ -114,7 +109,6 @@ function affichage(){
 		
 	});
 };
-
 
 
 affichage();

@@ -19,6 +19,7 @@ import com.google.appengine.labs.repackaged.org.json.JSONObject;
 @SuppressWarnings("serial")
 public class requestServlet extends HttpServlet {
 	
+	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException  {
 		resp.setContentType("application/json");
 		resp.setCharacterEncoding("UTF-8");
@@ -31,12 +32,14 @@ public class requestServlet extends HttpServlet {
 			String p = req.getParameter("p1");
 			int nbtonextpage = Integer.parseInt(req.getParameter("start"));
 			
-			url = new URL(
-				    "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&"
-				    + "start="+ nbtonextpage + "&q=" +p + "&userip=USERS-IP-ADDRESS&lang=fr");
+//			url = new URL(
+//				    "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&"
+//				    + "start="+ nbtonextpage + "&q=" +p + "&userip=USERS-IP-ADDRESS");
+			
+			url = new URL("https://www.googleapis.com/customsearch/v1?key=AIzaSyBU2lW6SS9BAIu_1rqLSmkXztNfcG-7v9Q&cx=007840350058366591309:jlizzfc_tam&q="+ p + "&start=" + nbtonextpage);
+            
 			URLConnection connection = url.openConnection();
 			//connection.addRequestProperty("Referer", /* Enter the URL of your site here */);
-
 			String line;
 			StringBuilder builder = new StringBuilder();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
@@ -51,7 +54,7 @@ public class requestServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				//e.printStackTrace();
 			}
-			System.out.println("lol");
+			//out.print(json);
 			
 //			JSONObject jsonresp = null;
 //			JSONArray arr = null;
@@ -78,7 +81,7 @@ public class requestServlet extends HttpServlet {
 		    //retour d'un jsonObject "retour" contenant un jsonarray "enrichie" ac les 4 elements (0-3), ac chaque element etant un jsonObject "URLenv" et un JSONArray "amenagement" contenant la liste des ammenagements
 		    
 		    //------------
-		    //pour tester, on suppose que l'enrichissement a ï¿½tï¿½ effectuï¿½, on a donc ce json en retour:
+		    //pour tester, on suppose que l'enrichissement a été effectué, on a donc ce json en retour:
 		    JSONArray retour = null;
 		    JSONObject o11 = new JSONObject();
 		    JSONObject o22 = new JSONObject();
@@ -91,11 +94,9 @@ public class requestServlet extends HttpServlet {
 		    try {
 		    	//1er elem
 
-				o33.put("URL", "en.wikipedia.org");
-
 			    JSONObject val1 = new JSONObject();
 				val1.put("nom", "assensseur3");
-				val1.put("descr", "ce batiment est equipï¿½ d'un assensseur3");
+				val1.put("descr", "ce batiment est equipé d'un assensseur3");
 			    JSONObject val2 = new JSONObject();
 				val2.put("nom", "porte");
 				val2.put("descr", "ce batiment a des portes larges3");
@@ -110,11 +111,10 @@ public class requestServlet extends HttpServlet {
 				//-----retour.put(2, three);
 				//2eme elem
 				
-				o11.put("URL", "www.amazon.com");
 
 			    val1 = new JSONObject();
 				val1.put("nom", "assensseur2");
-				val1.put("descr", "ce batiment est equipï¿½ d'un assensseur1");
+				val1.put("descr", "ce batiment est equipé d'un assensseur1");
 			    val2 = new JSONObject();
 				val2.put("nom", "porte");
 				val2.put("descr", "ce batiment a des portes larges1");
@@ -128,11 +128,10 @@ public class requestServlet extends HttpServlet {
 //				retour.put(0, one);
 				//3eme elem
 				
-				o22.put("URL", "twitter.com");
 
 			    val1 = new JSONObject();
 				val1.put("nom", "assensseur2");
-				val1.put("descr", "ce batiment est equipï¿½ d'un assensseur2");
+				val1.put("descr", "ce batiment est equipé d'un assensseur2");
 			    val2 = new JSONObject();
 				val2.put("nom", "porte");
 				val2.put("descr", "ce batiment a des portes larges2");
@@ -147,11 +146,10 @@ public class requestServlet extends HttpServlet {
 				//retour.put(2, three);
 				//4eme elem
 				
-				o44.put("URL", "boards.4chan.org");
 
 			    val1 = new JSONObject();
 				val1.put("nom", "assensseur4");
-				val1.put("descr", "ce batiment est equipï¿½ d'un assensseur4");
+				val1.put("descr", "ce batiment est equipé d'un assensseur4");
 			    val2 = new JSONObject();
 				val2.put("nom", "porte");
 				val2.put("descr", "ce batiment a des portes larges4");
@@ -166,32 +164,41 @@ public class requestServlet extends HttpServlet {
 				
 				
 				
-				JSONObject one = (JSONObject) json.optJSONObject("responseData").optJSONArray("results").get(0);
+				JSONObject one = (JSONObject) json.optJSONArray("items").get(0);
 				o11.put("equipement", o2);
 				one.put("resp", o22);
 				//retour.put(0, one);
 				
-				JSONObject two = (JSONObject) json.optJSONObject("responseData").optJSONArray("results").get(1);
+				JSONObject two = (JSONObject) json.optJSONArray("items").get(1);
 				o22.put("equipement", o2);
 				two.put("resp", o22);
 				//retour.put(1, two);
 				
-				JSONObject three = (JSONObject) json.optJSONObject("responseData").optJSONArray("results").get(2);
+				JSONObject three = (JSONObject) json.optJSONArray("items").get(2);
 				o33.put("equipement", o3);
 				three.put("resp", o33);
 				//retour.put(2, three);
 				
-				JSONObject four = (JSONObject) json.optJSONObject("responseData").optJSONArray("results").get(3);
+				JSONObject four = (JSONObject) json.optJSONArray("items").get(3);
 				o44.put("equipement", o4);
 				four.put("resp", o44);
 				//retour.put(3, four);
 				
-				json.getJSONObject("responseData").remove("results");
-				json.getJSONObject("responseData").append("results",one);
-				//json.getJSONObject("responseData").getJSONArray("results").put(one);
-				json.getJSONObject("responseData").getJSONArray("results").put(two);
-				json.getJSONObject("responseData").getJSONArray("results").put(three);
-				json.getJSONObject("responseData").getJSONArray("results").put(four);
+				JSONArray newitem = new JSONArray();
+				newitem.put(one);
+				newitem.put(two);
+				newitem.put(three);
+				newitem.put(four);
+				newitem.put(json.optJSONArray("items").get(4));
+				newitem.put(json.optJSONArray("items").get(5));
+				newitem.put(json.optJSONArray("items").get(6));
+				newitem.put(json.optJSONArray("items").get(7));
+				newitem.put(json.optJSONArray("items").get(8));
+				newitem.put(json.optJSONArray("items").get(9));
+				
+				
+				json.getJSONObject("responseData").remove("items");
+				json.getJSONObject("responseData").append("items",newitem);
 				
 				//out.print(json);
 				
@@ -237,16 +244,6 @@ public class requestServlet extends HttpServlet {
 //				}
 //		    }
 			
-			try {
-				//json2.put("response", arr);
-				//json2.put("nextpage", nbtonextpage+8);
-				json.put("nextpage", nbtonextpage+4);
-				json.put("lastpage", nbtonextpage-4);
-				
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			out.print(json);
 			//out.flush();
 				
@@ -256,6 +253,7 @@ public class requestServlet extends HttpServlet {
 		}
 }
 
+	
 	
 //	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 //			throws IOException {
@@ -362,6 +360,7 @@ public class requestServlet extends HttpServlet {
 //		}
 //	}
 	
+	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("application/json");

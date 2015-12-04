@@ -73,10 +73,10 @@
 	   
        <div class="row" ng-repeat="result in item">
 	   
-		        <h3>{{result.titleNoFormatting}}</h3>
-		        <a ng-href="{{result.unescapedUrl}}">{{result.unescapedUrl}}</a>
+		        <h3>{{result.htmlTitle}}</h3>
+		        <a ng-href="{{result.link}}">{{result.displayLink}}</a>
 <!-- 		        <h2>{{result.url}}</h2> -->
-		        <p>{{result.content}}</p>
+		        <p>{{result.snippet}}</p>
 		        <p>infos en plus:</p>
 		        
 		        
