@@ -6,6 +6,8 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	
   	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-sanitize.js"></script>
+  	
 	  <script type="text/javascript" src="form.js"></script>
 
     <title>Handicacces</title>
@@ -73,7 +75,8 @@
 	   
        <div class="row" ng-repeat="result in item">
 	   
-		        <h3>{{result.htmlTitle}}</h3>
+	   			<h3 ng-bind-html="result.htmlTitle"></h3>
+<!-- 		        <h3>{{result.htmlTitle}}</h3> -->
 		        <a ng-href="{{result.link}}">{{result.displayLink}}</a>
 <!-- 		        <h2>{{result.url}}</h2> -->
 		        <p>{{result.snippet}}</p>

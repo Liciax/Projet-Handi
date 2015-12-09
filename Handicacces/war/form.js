@@ -15,8 +15,8 @@ function (a) {
 
 
 function affichage(){
-	var app = angular.module('app.search',[]);
-	app.controller("ResultController", function($scope,$http){
+	var app = angular.module('app.search',['ngSanitize' ]);
+	app.controller("ResultController", ['$scope','$http', '$sce' ,function($scope,$http,$sce){
 
 		var user = {nom:'geof', annote:false};
 		this.amenagements = [
@@ -44,7 +44,8 @@ function affichage(){
 				} 
 			});
 		};
-  
+		
+		
 
 //Code pour afficher le plug-in
 		this.tab = 1;
@@ -107,7 +108,7 @@ function affichage(){
 		};
 		
 		
-	});
+	}]);
 };
 
 
