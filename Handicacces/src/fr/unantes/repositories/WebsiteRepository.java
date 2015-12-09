@@ -1,14 +1,17 @@
 package fr.unantes.repositories;
 import com.google.appengine.api.datastore.ReadPolicy;
+import com.google.appengine.labs.repackaged.org.json.JSONArray;
+import com.google.appengine.labs.repackaged.org.json.JSONException;
+import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 
-import fr.unantes.beans.Amenagement;
+import fr.unantes.beans.Layout;
 import fr.unantes.beans.Website;
-
-import java.util.Collection;
  
 import static com.googlecode.objectify.ObjectifyService.ofy;
+
+import java.util.List;
 
 public class WebsiteRepository {
 
@@ -16,7 +19,7 @@ public class WebsiteRepository {
 	 
 	 static {
 	  ObjectifyService.register(Website.class);
-	  ObjectifyService.register(Amenagement.class);
+	  ObjectifyService.register(Layout.class);
 	 }
 	 
 	 private WebsiteRepository() {
@@ -30,14 +33,14 @@ public class WebsiteRepository {
 	 }
 	 
 	 //Retourne tous les sites web
-	 public Collection<Website> findWebsites() {
-		 Collection<Website> websites = ofy().load().type(Website.class).list();
+	 public List<Website> findWebsites() {
+		 List<Website> websites = ofy().load().type(Website.class).list();
 		 return websites;
 	 }
 	 
-	 //Retourne tous les sites web qui possÃ¨de un amÃ©nagement particulier
-	 public Collection<Website> findWebsitesByAmenagements(String nomAmenagement) {
-		 Collection<Website> websites = ofy().load().type(Website.class).filter("amenagement", nomAmenagement).list();
+	 //Retourne tous les sites web qui possède un aménagement particulier
+	 public List<Website> findWebsitesByAmenagements(int id_layout) {
+		 List<Website> websites = ofy().load().type(Website.class).filter("layout", id_layout).list();
 	     return websites;
 	    }
 	 
@@ -47,22 +50,25 @@ public class WebsiteRepository {
 		 return website;
 	 }
 
-	 //CrÃ©e un site web
+	 //Crée un site web
 	 public Website create(Website website) {
+
 		 ofy().save().entity(website).now();
 		 return website;
 	 }
 	 
 	 
 	 //Update le site web et lui ajoute un amenagement
-	 public Website renseigner(Website editedWebsite, String nom_amenagement, String description_amenagement){
+	 public Website update(String url, int layout){
+		 Website editedWebsite = new Website();
+
 		 if (editedWebsite.getUrl() == null) {
 			   return null;
 		}
-		 Amenagement amenagement = new Amenagement(nom_amenagement, description_amenagement);
-		 editedWebsite.renseigner(amenagement);
-			 
+
+		 
 		Website website = ofy().load().key(Key.create(Website.class, editedWebsite.getUrl())).now();
+		website.getLayouts().add(layout);
 		ofy().save().entity(website).now();
 			 
 		 return website;

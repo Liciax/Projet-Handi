@@ -80,14 +80,13 @@
 		        <a ng-href="{{result.link}}">{{result.displayLink}}</a>
 <!-- 		        <h2>{{result.url}}</h2> -->
 		        <p>{{result.snippet}}</p>
-		        <p>infos en plus:</p>
 		        
 		        
 		        <!-- -------------------------------------------------------------------------- -->
 		        <div class="annotations" >
 		        	<ul>
-		        		<li ng-repeat="info in result.resp.equipement">{{info.nom}}</li>
-		       			<li>
+		        		<li class="old_annotations" ng-repeat="info in result.resp.equipement">{{info.nom}}</li>
+		       			<li class="old_annotations">
 							<div ng-class="{active:resultat.isSelected(result)}"> 
 								<a href ng-click="resultat.selectTab(result)" class="ajout"><img src="images/add.png" class="add_more"></a> 
 							</div>
@@ -99,11 +98,11 @@
 									<img src="images/logo.png" id="logo"> </header>
 								<ul id="formulaire" >
 									<form>
-										<li ng-repeat="amenagement in resultat.amenagements">
+										<li class="choix" ng-repeat="amenagement in resultat.amenagements">
 											<input type="checkbox" ng-model="amenagement.checked">
 											<span ng-model="amenagement.nom">{{amenagement.nom}}</span> <a href="" class="help" title="{{amenagement.description}}">?</a> </li>
 										<li>
-											<input type="submit" name="Submit" value="Valider" id="valider" ng-click="renseigner(result,resultat.amenagements)">
+											<input type="submit" name="Submit" value="Valider" class="valider" ng-click="renseigner(result,resultat.amenagements)">
 										</li>
 									</form>
 								</ul>

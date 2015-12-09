@@ -7,13 +7,14 @@ import com.google.api.server.spi.response.BadRequestException;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.datastore.Cursor;
-//import com.google.appengine.datanucleus.query.JDOCursorHelper;
 import com.googlecode.objectify.NotFoundException;
 
 import fr.unantes.beans.Amenagement;
+import fr.unantes.beans.Layout;
 import fr.unantes.beans.User;
 import fr.unantes.beans.Website;
 import fr.unantes.repositories.AmenagementRepository;
+import fr.unantes.repositories.LayoutRepository;
 import fr.unantes.repositories.WebsiteRepository;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
@@ -32,30 +33,30 @@ import javax.jdo.Query;
 
 @Api(
 	name = "handicacces", 
-	version = "v1",
+	version = "v3",
 	description = "Little API which list some websites with layouts for disabled people"
 	)
 public class WebsiteEndpoint {
 	
-	//Tout e qui concerne les AmÃ©nagements
+	//Tout ce qui concerne les Aménagements
 	@ApiMethod(name = "ListAllLayouts", httpMethod = ApiMethod.HttpMethod.GET)
-	 public Collection<Amenagement> listAmenagements() {
-	  return AmenagementRepository.getInstance().findAmenagements();
+	 public Collection<Layout> listLayouts() {
+	  return LayoutRepository.getInstance().findLayouts();
 	 }
 	
 	 @ApiMethod(name = "CreateLayout", httpMethod = ApiMethod.HttpMethod.POST)
-	 public Amenagement createAmenagement(Amenagement amenagement) {
-	  return AmenagementRepository.getInstance().create(amenagement);
+	 public Layout createLayout(Layout layout) {
+	  return LayoutRepository.getInstance().create(layout);
 	 }
 	 
 	 @ApiMethod(name = "UpdateLayout", httpMethod = ApiMethod.HttpMethod.PUT)
-	 public Amenagement updateAmenagement(Amenagement editedAmenagement) {
-	  return AmenagementRepository.getInstance().update(editedAmenagement);
+	 public Layout updateLayout(Layout editedLayout) {
+	  return LayoutRepository.getInstance().update(editedLayout);
 	 }
 	 
 	 @ApiMethod(name = "RemoveLayout", httpMethod = ApiMethod.HttpMethod.DELETE)
-	 public void removeAmenagement(@Named("id") Long id) {
-		 AmenagementRepository.getInstance().remove(id);
+	 public void removeLayout(@Named("id") Long id) {
+		 LayoutRepository.getInstance().remove(id);
 	 }
 	
 	
@@ -66,11 +67,11 @@ public class WebsiteEndpoint {
 	 }
 	 
 	 @ApiMethod(name = "ListWebsitesByLayout", httpMethod = ApiMethod.HttpMethod.GET)
-	 public Collection<Website> getWebsites(@Named("nom_amenagement") String nom_amenagement)  throws UnauthorizedException{
-		 if(nom_amenagement.equals(null)){
+	 public Collection<Website> getWebsites(@Named("id_layout") int id_layout)  throws UnauthorizedException{
+		/* if(id_layout == null){
 			 throw new UnauthorizedException("Layout not found");
-		 }
-	 return WebsiteRepository.getInstance().findWebsitesByAmenagements(nom_amenagement);
+		 }*/
+	 return WebsiteRepository.getInstance().findWebsitesByAmenagements(id_layout);
 	 }
 	 
 	 @ApiMethod(name = "GetWebsite", httpMethod = ApiMethod.HttpMethod.GET)
@@ -80,17 +81,14 @@ public class WebsiteEndpoint {
 	 
 	 
 	 @ApiMethod(name = "CreateWebsite", httpMethod = ApiMethod.HttpMethod.POST)
-	 public Website create(@Named("url")String url, Amenagement amenagement) {
-		 Website website = new Website();
-		 website.setUrl(url);
-		 website.renseigner(amenagement);
+	 public Website create(Website website) {
 		 return WebsiteRepository.getInstance().create(website);
 	 }
 	 
 	 
 	 @ApiMethod(name = "UpdateWebsite", httpMethod = ApiMethod.HttpMethod.PUT)
-	 public Website update(Website website, @Named("nom")String nom, @Named("description")String description){
-		 return WebsiteRepository.getInstance().renseigner(website, nom, description);
+	 public Website update(@Named("url") String url, @Named("layout")int layout){ 
+		 return WebsiteRepository.getInstance().update(url, layout);
 	 }
 	 
 	 @ApiMethod(name = "RemoveWebsite", httpMethod = ApiMethod.HttpMethod.DELETE)

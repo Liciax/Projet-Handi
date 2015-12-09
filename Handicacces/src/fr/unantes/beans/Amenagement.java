@@ -4,13 +4,12 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
 @Entity
-public class Amenagement {
+public class Amenagement {/*
 
 	@Id
 	private Long id;
 	private String nom;
 	private String description;
-	private boolean checked;
 	public Amenagement() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -20,7 +19,6 @@ public class Amenagement {
 		this.id = id;
 		this.nom = nom;
 		this.description = description;
-		this.checked = false;
 	}
 	
 	
@@ -28,7 +26,6 @@ public class Amenagement {
 		super();
 		this.nom = nom;
 		this.description = description;
-		this.checked = false;
 	}
 	public Long getId() {
 		return id;
@@ -48,12 +45,6 @@ public class Amenagement {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public boolean isChecked() {
-		return checked;
-	}
-	public void setChecked(boolean checked) {
-		this.checked = checked;
-	}
-	
+	*/
 	
 }

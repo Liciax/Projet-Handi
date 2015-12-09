@@ -10,7 +10,7 @@ import com.googlecode.objectify.ObjectifyService;
 import fr.unantes.beans.Amenagement;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
-public class AmenagementRepository {
+public class AmenagementRepository {/*
 	private static AmenagementRepository amenagementRepository = null;
 	 
 	 static {
@@ -45,7 +45,6 @@ public class AmenagementRepository {
 	  Amenagement amenagement = ofy().load().key(Key.create(Amenagement.class, editedAmenagement.getId())).now();
 	  amenagement.setNom(editedAmenagement.getNom());
 	  amenagement.setDescription(editedAmenagement.getDescription());
-	  amenagement.setChecked(editedAmenagement.isChecked());
 	  ofy().save().entity(amenagement).now();
 	 
 	  return amenagement;
@@ -56,5 +55,5 @@ public class AmenagementRepository {
 	   return;
 	  }
 	  ofy().delete().type(Amenagement.class).id(id).now();
-	 }
+	 }*/
 }
