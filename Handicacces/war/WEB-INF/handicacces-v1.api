@@ -94,19 +94,57 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "handicacces.listAllWebsites" : {
-      "path" : "website",
-      "httpMethod" : "GET",
+    "handicacces.updateLayout" : {
+      "path" : "amenagement",
+      "httpMethod" : "PUT",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.listWebsites",
+      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.updateAmenagement",
       "request" : {
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "handicacces.createLayout" : {
+      "path" : "createAmenagement",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.createAmenagement",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "handicacces.removeLayout" : {
+      "path" : "amenagement/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.removeAmenagement",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     },
     "handicacces.listAllLayouts" : {
@@ -166,54 +204,16 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "handicacces.updateLayout" : {
-      "path" : "amenagement",
-      "httpMethod" : "PUT",
+    "handicacces.listAllWebsites" : {
+      "path" : "website",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.updateAmenagement",
+      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.listWebsites",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "handicacces.removeLayout" : {
-      "path" : "amenagement/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.removeAmenagement",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
         "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
-    "handicacces.createLayout" : {
-      "path" : "createAmenagement",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.createAmenagement",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -262,18 +262,6 @@
           }
         }
       },
-      "WebsiteCollection" : {
-        "id" : "WebsiteCollection",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Website"
-            }
-          }
-        }
-      },
       "AmenagementCollection" : {
         "id" : "AmenagementCollection",
         "type" : "object",
@@ -282,6 +270,18 @@
             "type" : "array",
             "items" : {
               "$ref" : "Amenagement"
+            }
+          }
+        }
+      },
+      "WebsiteCollection" : {
+        "id" : "WebsiteCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Website"
             }
           }
         }
@@ -306,10 +306,23 @@
           "$ref" : "Website"
         }
       },
-      "fr.unantes.endpoints.WebsiteEndpoint.listWebsites" : {
+      "fr.unantes.endpoints.WebsiteEndpoint.updateAmenagement" : {
+        "request" : {
+          "$ref" : "Amenagement"
+        },
         "response" : {
-          "$ref" : "WebsiteCollection"
+          "$ref" : "Amenagement"
         }
+      },
+      "fr.unantes.endpoints.WebsiteEndpoint.createAmenagement" : {
+        "request" : {
+          "$ref" : "Amenagement"
+        },
+        "response" : {
+          "$ref" : "Amenagement"
+        }
+      },
+      "fr.unantes.endpoints.WebsiteEndpoint.removeAmenagement" : {
       },
       "fr.unantes.endpoints.WebsiteEndpoint.listAmenagements" : {
         "response" : {
@@ -326,22 +339,9 @@
           "$ref" : "Website"
         }
       },
-      "fr.unantes.endpoints.WebsiteEndpoint.updateAmenagement" : {
-        "request" : {
-          "$ref" : "Amenagement"
-        },
+      "fr.unantes.endpoints.WebsiteEndpoint.listWebsites" : {
         "response" : {
-          "$ref" : "Amenagement"
-        }
-      },
-      "fr.unantes.endpoints.WebsiteEndpoint.removeAmenagement" : {
-      },
-      "fr.unantes.endpoints.WebsiteEndpoint.createAmenagement" : {
-        "request" : {
-          "$ref" : "Amenagement"
-        },
-        "response" : {
-          "$ref" : "Amenagement"
+          "$ref" : "WebsiteCollection"
         }
       }
     }
