@@ -1,4 +1,6 @@
 package fr.unantes.repositories;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.ReadPolicy;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
@@ -11,6 +13,8 @@ import fr.unantes.beans.Website;
  
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class WebsiteRepository {
@@ -51,7 +55,11 @@ public class WebsiteRepository {
 	 }
 
 	 //Crée un site web
-	 public Website create(Website website) {
+	 public Website create(Website website) throws Exception {	  
+	String url = website.getUrl();
+	if(ofy().load().type(Website.class).id(url).now() != null){
+		throw new Exception("Site web deja existant");
+	}
 
 		 ofy().save().entity(website).now();
 		 return website;
@@ -59,18 +67,20 @@ public class WebsiteRepository {
 	 
 	 
 	 //Update le site web et lui ajoute un amenagement
-	 public Website update(String url, int layout){
-		 Website editedWebsite = new Website();
+	 public Website update(Website editedWebsite) throws Exception{
+		 String url = editedWebsite.getUrl();
+		 if (url == null) {
+			   throw new Exception("Website innexistant");
+		 }
 
-		 if (editedWebsite.getUrl() == null) {
-			   return null;
-		}
-
-		 
 		Website website = ofy().load().key(Key.create(Website.class, editedWebsite.getUrl())).now();
-		website.getLayouts().add(layout);
-		ofy().save().entity(website).now();
-			 
+		for(Layout each : website.getLayouts()){
+			if(!website.contains(each)){
+				website.getLayouts().add(each);
+			}
+		 }
+		
+		ofy().save().entity(website).now(); 
 		 return website;
 	 }
 	 

@@ -33,7 +33,7 @@ import javax.jdo.Query;
 
 @Api(
 	name = "handicacces", 
-	version = "v3",
+	version = "v1",
 	description = "Little API which list some websites with layouts for disabled people"
 	)
 public class WebsiteEndpoint {
@@ -68,10 +68,7 @@ public class WebsiteEndpoint {
 	 
 	 @ApiMethod(name = "ListWebsitesByLayout", httpMethod = ApiMethod.HttpMethod.GET)
 	 public Collection<Website> getWebsites(@Named("id_layout") int id_layout)  throws UnauthorizedException{
-		/* if(id_layout == null){
-			 throw new UnauthorizedException("Layout not found");
-		 }*/
-	 return WebsiteRepository.getInstance().findWebsitesByAmenagements(id_layout);
+	  return WebsiteRepository.getInstance().findWebsitesByAmenagements(id_layout);
 	 }
 	 
 	 @ApiMethod(name = "GetWebsite", httpMethod = ApiMethod.HttpMethod.GET)
@@ -82,13 +79,25 @@ public class WebsiteEndpoint {
 	 
 	 @ApiMethod(name = "CreateWebsite", httpMethod = ApiMethod.HttpMethod.POST)
 	 public Website create(Website website) {
-		 return WebsiteRepository.getInstance().create(website);
+		 try {
+			return WebsiteRepository.getInstance().create(website);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	 }
 	 
 	 
 	 @ApiMethod(name = "UpdateWebsite", httpMethod = ApiMethod.HttpMethod.PUT)
-	 public Website update(@Named("url") String url, @Named("layout")int layout){ 
-		 return WebsiteRepository.getInstance().update(url, layout);
+	 public Website update(Website website){ 
+		 try {
+			return WebsiteRepository.getInstance().update(website);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return website;
 	 }
 	 
 	 @ApiMethod(name = "RemoveWebsite", httpMethod = ApiMethod.HttpMethod.DELETE)

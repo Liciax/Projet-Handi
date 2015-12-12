@@ -13,16 +13,14 @@ import java.util.List;
 /**
  * 
  * @author Geof
- *
+ * @date 12-12-2015
  */
 @Entity
 public class Website {
 
 	@Id
     String url;
-    //private List<Layout> layouts;
-	List<Integer> layouts = new ArrayList();
-	//Collection<Key> layouts = new ArrayList<Key>();
+    private List<Layout> layouts;
 	
 
     public Website() {}
@@ -39,29 +37,21 @@ public class Website {
         this.url = url;
     }
 
-	public List getLayouts() {
+	public List<Layout> getLayouts() {
 		return layouts;
 	}
 
-	public void setLayouts(List layouts) {
+	public void setLayouts(List<Layout> layouts) {
 		this.layouts = layouts;
 	}
 
-    
+	public boolean contains(Layout layout){
+		for(Layout each : this.layouts){
+			if(each.equals(layout)){
+				return true;
+			}
+		}
+		return false;
+	}
 
-	
-
-    
-    /*
-    public List<Layout> getLayouts () {
-        if (layouts == null) {
-            return new ArrayList<Layout>();
-        }
-        return layouts;
-    }
-
-    public void setLayouts (List<Layout> layouts) {
-        this.layouts = layouts;
-    }
-*/
 }
