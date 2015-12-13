@@ -72,15 +72,12 @@ function affichage(){
 //		console.log(newLayouts);
 		var websiteAlancer = '{ "url" : "' + website.displayLink + '" , "layouts" : [';
 		angular.forEach(newLayouts, function(layout) {
-			console.log(website);
-			console.log(layout);
+//			console.log(website);
+//			console.log(layout);
 //			console.log(layout.checked);
-			websiteAlancer = websiteAlancer + '{ "id": "' + layout.id +'", "name": "' + layout.name +'", "description": "' + layout.description +'", "checked": false, "kind": "handicacces#resourcesItem"},'
 			if (layout.checked){
-//				console.log("yay");
-			//; manquant
-//				console.log(website.titleNoFormatting);
-			website.resp.equipement.push(layout);
+				websiteAlancer = websiteAlancer + '{ "id": "' + layout.id +'", "name": "' + layout.name +'", "description": "' + layout.description +'", "checked": false},'
+				website.resp.equipement.push(layout);
 			//website.utilisateurs.push({nom:'geof', annote:true})
 			} 
 		});
@@ -90,12 +87,12 @@ function affichage(){
 		var jsonAenvoyer = JSON.parse(websiteAlancer);
 		console.log(jsonAenvoyer);
 		if(websiteAcreer) {
-			$http.post("https://handicacces.appspot.com/_ah/api#p/handicacces/v1/handicacces.createWebsite", jsonAenvoyer)
+			$http.post("https://handicacces.appspot.com/_ah/api/handicacces/v1/create?fields=layouts%2Curl", jsonAenvoyer)
 			.success(function(data) {
 				console.log("ok crea");
 			});
 		} else {
-			$http.post("https://handicacces.appspot.com/_ah/api#p/handicacces/v1/handicacces.updateWebsite", jsonAenvoyer)
+			$http.post("https://handicacces.appspot.com/_ah/api/handicacces/v1/website?fields=layouts%2Curl", jsonAenvoyer)
 			.success(function(data) {
 				console.log("ok");
 			});
@@ -131,7 +128,7 @@ function affichage(){
 			    	$http.get(url)
 								.success(function(datas){
 									$scope.layouts = datas.items;
-									console.log(datas.items); 
+//									console.log(datas.items); 
 			      				})
 								.error(function(){
 									console.log("je n'arrive pas à charger les layouts"); 

@@ -197,6 +197,8 @@ public class requestServlet extends HttpServlet {
 				newitem.put(json.optJSONArray("items").get(9));
 				
 				
+				
+				
 				json.getJSONObject("responseData").remove("items");
 				json.getJSONObject("responseData").append("items",newitem);
 				
