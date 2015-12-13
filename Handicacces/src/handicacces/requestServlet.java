@@ -197,8 +197,64 @@ public class requestServlet extends HttpServlet {
 				newitem.put(json.optJSONArray("items").get(9));
 				
 				
-				
-				
+//----------------------------------------------------------------------------------------------------------------------------------------------//				
+//          try {
+//                JSONArray newitem = new JSONArray();
+//                JSONObject valIni;
+//                
+//                url = new URL("https://handicacces.appspot.com/_ah/api/handicacces/v1/website");
+//              connection = url.openConnection();
+//              builder = new StringBuilder();
+//              reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+//              while((line = reader.readLine()) != null) {
+//               builder.append(line);
+//              }
+//              JSONObject listeDesAmenagements = null;
+//              try {
+//                listeDesAmenagements = new JSONObject(builder.toString());
+//              } catch (JSONException e) {
+//                  // TODO Auto-generated catch block
+//                  //e.printStackTrace();
+//              }
+//                
+//                for(int i = 0; i < json.optJSONArray("items").length(); i++)
+//                {
+//                  
+//                  valIni = (JSONObject) json.optJSONArray("items").get(i);
+////                  url = new URL("https://handicacces.appspot.com/_ah/api/handicacces/v1/website/" + valIni.getString("displayLink"));
+////                    connection = url.openConnection();
+////                    builder = new StringBuilder();
+////                    reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+////                    while((line = reader.readLine()) != null) {
+////                     builder.append(line);
+////                    }
+////                    JSONObject jsonEnrichit = null;
+////                    try {
+////                      jsonEnrichit = new JSONObject(builder.toString());
+////                    } catch (JSONException e) {
+////                        // TODO Auto-generated catch block
+////                        //e.printStackTrace();
+////                    }
+//                  JSONObject jsonEnrichit = null;
+//                  JSONArray listeVide = new JSONArray();
+//                  
+//                  int j = 0;
+//                  while(j < listeDesAmenagements.getJSONArray("items").length()) {
+//                    if(listeDesAmenagements.getJSONArray("items").getJSONObject(j).getString("url").compareTo(valIni.getString("displayLink")) ==0) {
+//                      jsonEnrichit = listeDesAmenagements.getJSONArray("items").getJSONObject(j);
+//                      j = listeDesAmenagements.getJSONArray("items").length() +2;
+//                    }
+//                  }
+//                  if(j == listeDesAmenagements.getJSONArray("items").length()) {
+//                    jsonEnrichit = new JSONObject();
+//                    jsonEnrichit.put("url", valIni.getString("displayLink"));
+//                    jsonEnrichit.put("layouts", listeVide);
+//                    }
+//                  valIni.put("resp", jsonEnrichit);
+//                  newitem.put(valIni);
+//                }
+              //----------------------------------------------------------------------------------------------------------------------------------------------//  
+                
 				json.getJSONObject("responseData").remove("items");
 				json.getJSONObject("responseData").append("items",newitem);
 				
