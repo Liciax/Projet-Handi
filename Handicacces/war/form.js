@@ -17,29 +17,62 @@ function (a) {
 function affichage(){
 	var app = angular.module('app.search',['ngSanitize' ]);
 	app.controller("ResultController", ['$scope','$http', '$sce' ,function($scope,$http,$sce){
-
-		var user = {nom:'geof', annote:false};
-		this.amenagements = [
-			{nom:'assensseur', description:'ce batiment possede un assensseur', checked:false},
-			{nom:'porte', description:'ce batiment possede une porte 3.0', checked:false},
-			{nom:'toilettes', description:'ce batiment possede des grandes toilettes', checked:false},
-			{nom:'chient', description:'waf waf', checked:false}
-		];
-		   
-		$scope.renseigner = function(website,amenagements) {
-
+	$scope.layouts = [];
+		/*
+		this.layouts = {
+			 "items": [
+			  {
+			   "id": "69",
+			   "name": "chien",
+			   "description": "geoffrou test",
+			   "checked": false,
+			   "kind": "handicacces#resourcesItem"
+			  },
+			  {
+			   "id": "999",
+			   "name": "iue",
+			   "description": "aq",
+			   "checked": false,
+			   "kind": "handicacces#resourcesItem"
+			  },
+			  {
+			   "id": "78987",
+			   "name": "test",
+			   "description": "test",
+			   "checked": false,
+			   "kind": "handicacces#resourcesItem"
+			  }
+			 ],
+			 "kind": "handicacces#resources",
+			 "etag": "\"CHoPyC7Dlwyk6eJbiwJsGs2RfVk/J3fMAf83xtTu1tO64V-OdJ200sM\""
+			}
+*/
+/*
+		var url = 'https://handicacces.appspot.com/_ah/api/handicacces/v1/layout'
+    	$http.get(url)
+					.success(function(datas){
+						this.layouts = datas;
+						console.log(datas); 
+      				})
+					.error(function(){
+						console.log("je n'arrive pas à charger les layouts"); 
+	  				}); 
+*/
+		 
+		$scope.renseigner = function(website,newLayout) {
+			
 			console.log(website.titleNoFormatting);
-			console.log(amenagements);
-			var newAmenagements = amenagements;
-			console.log(newAmenagements);
+			console.log(layouts);
+			var newLayouts = layouts;
+			console.log(newLayouts);
 		          //website.amenagements = [];
-			angular.forEach(newAmenagements, function(amenagement) {
-				console.log(amenagement.nom);
-				console.log(amenagement.checked);
-				if (amenagement.checked){
+			angular.forEach(newLayouts, function(newLayout) {
+				console.log(newLayout.name);
+				console.log(newLayout.checked);
+				if (newLayout.checked){
 					console.log("yay");
 				console.log(website.titleNoFormatting)
-				website.resp.equipement.push(amenagement);
+				website.resp.equipement.push(newLayout);
 				//website.utilisateurs.push({nom:'geof', annote:true})
 				} 
 			});
@@ -49,7 +82,7 @@ function affichage(){
 
 //Code pour afficher le plug-in
 		this.tab = 1;
-		  
+
 		this.selectTab = function(setTab){
 			if(this.tab == 1) {
 				this.tab = setTab;
@@ -57,8 +90,8 @@ function affichage(){
 			else {
 				this.tab = 1;
 			}
-			for (i = 0; i < this.amenagements.length; i++) { 
-				this.amenagements[i].checked = false;
+			for (i = 0; i < $scope.layouts.length; i++) { 
+				$scope.layouts[i].checked = false;
 			}
 		};
 		
@@ -67,7 +100,23 @@ function affichage(){
 		};
 		
 		
-		$scope.affresult = function(){
+		$scope.affresult = function(){	
+			console.log($scope.layouts); 
+			if($scope.layouts.length == 0 ){
+				var url = 'https://handicacces.appspot.com/_ah/api/handicacces/v1/layout'
+			    	$http.get(url)
+								.success(function(datas){
+									$scope.layouts = datas.items;
+									console.log(datas.items); 
+			      				})
+								.error(function(){
+									console.log("je n'arrive pas à charger les layouts"); 
+				  				}); 
+				
+			}
+			
+			
+			
 			var temp = $scope.p1;
 			$http.get('http://handicacces.appspot.com/requete?p1=' + temp + '&start=1' ).success(function(response) {
 				var json = response; 
