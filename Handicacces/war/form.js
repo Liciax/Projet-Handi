@@ -59,24 +59,48 @@ function affichage(){
 	  				}); 
 */
 		 
-		$scope.renseigner = function(website,newLayout) {
-			
-			console.log(website.titleNoFormatting);
-			console.log(layouts);
-			var newLayouts = layouts;
-			console.log(newLayouts);
-		          //website.amenagements = [];
-			angular.forEach(newLayouts, function(newLayout) {
-				console.log(newLayout.name);
-				console.log(newLayout.checked);
-				if (newLayout.checked){
-					console.log("yay");
-				console.log(website.titleNoFormatting)
-				website.resp.equipement.push(newLayout);
-				//website.utilisateurs.push({nom:'geof', annote:true})
-				} 
+	$scope.renseigner = function(website,inflayout) {
+
+//		console.log(website.titleNoFormatting);
+//		console.log(layouts);
+		var newLayouts = inflayout;
+		var websiteAcreer = true;
+		if(website.hasOwnProperty('resp')){
+			websiteAcreer = false;
+		}
+		
+//		console.log(newLayouts);
+		var websiteAlancer = '{ "url" : "' + website.displayLink + '" , "layouts" : [';
+		angular.forEach(newLayouts, function(layout) {
+			console.log(website);
+			console.log(layout);
+//			console.log(layout.checked);
+			websiteAlancer = websiteAlancer + '{ "id": "' + layout.id +'", "name": "' + layout.name +'", "description": "' + layout.description +'", "checked": false, "kind": "handicacces#resourcesItem"},'
+			if (layout.checked){
+//				console.log("yay");
+			//; manquant
+//				console.log(website.titleNoFormatting);
+			website.resp.equipement.push(layout);
+			//website.utilisateurs.push({nom:'geof', annote:true})
+			} 
+		});
+		websiteAlancer = websiteAlancer.substring(0, websiteAlancer.length - 1);
+		websiteAlancer = websiteAlancer + ']}';
+		console.log(websiteAlancer);
+		var jsonAenvoyer = JSON.parse(websiteAlancer);
+		console.log(jsonAenvoyer);
+		if(websiteAcreer) {
+			$http.post("https://handicacces.appspot.com/_ah/api#p/handicacces/v1/handicacces.createWebsite", jsonAenvoyer)
+			.success(function(data) {
+				console.log("ok crea");
 			});
-		};
+		} else {
+			$http.post("https://handicacces.appspot.com/_ah/api#p/handicacces/v1/handicacces.updateWebsite", jsonAenvoyer)
+			.success(function(data) {
+				console.log("ok");
+			});
+		}
+	};
 		
 		
 
