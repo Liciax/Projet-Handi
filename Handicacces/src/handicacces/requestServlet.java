@@ -42,7 +42,8 @@ public class requestServlet extends HttpServlet {
 			//connection.addRequestProperty("Referer", /* Enter the URL of your site here */);
 			String line;
 			StringBuilder builder = new StringBuilder();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+			InputStreamReader inp = new InputStreamReader(connection.getInputStream(), "UTF-8");
+			BufferedReader reader = new BufferedReader(inp);
 			while((line = reader.readLine()) != null) {
 			 builder.append(line);
 			}
@@ -82,177 +83,189 @@ public class requestServlet extends HttpServlet {
 		    
 		    //------------
 		    //pour tester, on suppose que l'enrichissement a été effectué, on a donc ce json en retour:
-		    JSONArray retour = null;
-		    JSONObject o11 = new JSONObject();
-		    JSONObject o22 = new JSONObject();
-		    JSONObject o33 = new JSONObject();
-		    JSONObject o44 = new JSONObject();
-		    JSONArray o1 = new JSONArray();
-		    JSONArray o2 = new JSONArray();
-		    JSONArray o3 = new JSONArray();
-		    JSONArray o4 = new JSONArray();
-		    try {
-		    	//1er elem
-
-			    JSONObject val1 = new JSONObject();
-				val1.put("nom", "assensseur3");
-				val1.put("descr", "ce batiment est equipé d'un assensseur3");
-			    JSONObject val2 = new JSONObject();
-				val2.put("nom", "porte");
-				val2.put("descr", "ce batiment a des portes larges3");
-				o3.put(0, val1);
-				o3.put(1, val2);
-
-				//voila la forme du json recu pour le 1er lien, il faut donc maintenant inserer l'info:
-//				JSONObject three = (JSONObject) json.optJSONObject("responseData").optJSONArray("results").get(2);
-//				o33.put("equipement", o3);
+//		    JSONArray retour = null;
+//		    JSONObject o11 = new JSONObject();
+//		    JSONObject o22 = new JSONObject();
+//		    JSONObject o33 = new JSONObject();
+//		    JSONObject o44 = new JSONObject();
+//		    JSONArray o1 = new JSONArray();
+//		    JSONArray o2 = new JSONArray();
+//		    JSONArray o3 = new JSONArray();
+//		    JSONArray o4 = new JSONArray();
+//		    try {
+//		    	//1er elem
+//
+//			    JSONObject val1 = new JSONObject();
+//				val1.put("nom", "assensseur3");
+//				val1.put("descr", "ce batiment est equipé d'un assensseur3");
+//			    JSONObject val2 = new JSONObject();
+//				val2.put("nom", "porte");
+//				val2.put("descr", "ce batiment a des portes larges3");
+//				o3.put(0, val1);
+//				o3.put(1, val2);
+//
+//				//voila la forme du json recu pour le 1er lien, il faut donc maintenant inserer l'info:
+////				JSONObject three = (JSONObject) json.optJSONObject("responseData").optJSONArray("results").get(2);
+////				o33.put("equipement", o3);
+////				
+////				three.put("resp", o33);
+//				//-----retour.put(2, three);
+//				//2eme elem
 //				
-//				three.put("resp", o33);
-				//-----retour.put(2, three);
-				//2eme elem
-				
-
-			    val1 = new JSONObject();
-				val1.put("nom", "assensseur2");
-				val1.put("descr", "ce batiment est equipé d'un assensseur1");
-			    val2 = new JSONObject();
-				val2.put("nom", "porte");
-				val2.put("descr", "ce batiment a des portes larges1");
-				o1.put(0, val1);
-				o1.put(1, val2);
-				//voila la forme du json recu pour le 1er lien, il faut donc maintenant inserer l'info:
-//				JSONObject one = (JSONObject) json.optJSONObject("responseData").optJSONArray("results").get(0);
+//
+//			    val1 = new JSONObject();
+//				val1.put("nom", "assensseur2");
+//				val1.put("descr", "ce batiment est equipé d'un assensseur1");
+//			    val2 = new JSONObject();
+//				val2.put("nom", "porte");
+//				val2.put("descr", "ce batiment a des portes larges1");
+//				o1.put(0, val1);
+//				o1.put(1, val2);
+//				//voila la forme du json recu pour le 1er lien, il faut donc maintenant inserer l'info:
+////				JSONObject one = (JSONObject) json.optJSONObject("responseData").optJSONArray("results").get(0);
+////				o11.put("equipement", o2);
+////				
+////				one.put("resp", o22);
+////				retour.put(0, one);
+//				//3eme elem
+//				
+//
+//			    val1 = new JSONObject();
+//				val1.put("nom", "assensseur2");
+//				val1.put("descr", "ce batiment est equipé d'un assensseur2");
+//			    val2 = new JSONObject();
+//				val2.put("nom", "porte");
+//				val2.put("descr", "ce batiment a des portes larges2");
+//				o2.put(0, val1);
+//				o2.put(1, val2);
+//				//voila la forme du json recu pour le 1er lien, il faut donc maintenant inserer l'info:
+////				JSONObject two = (JSONObject) json.optJSONObject("responseData").optJSONArray("results").get(1);
+////				o22.put("equipement", o2);
+////				
+////				two.put("resp", o22);
+////				retour.put(1, two);
+//				//retour.put(2, three);
+//				//4eme elem
+//				
+//
+//			    val1 = new JSONObject();
+//				val1.put("nom", "assensseur4");
+//				val1.put("descr", "ce batiment est equipé d'un assensseur4");
+//			    val2 = new JSONObject();
+//				val2.put("nom", "porte");
+//				val2.put("descr", "ce batiment a des portes larges4");
+//				o4.put(0, val1);
+//				o4.put(1, val2);
+//				//voila la forme du json recu pour le 1er lien, il faut donc maintenant inserer l'info:
+////				JSONObject four = (JSONObject) json.optJSONObject("responseData").optJSONArray("results").get(3);
+////				o44.put("equipement", o4);
+////				
+////				four.put("resp", o44);
+////				retour.put(3, four);
+//				
+//				
+//				
+//				JSONObject one = (JSONObject) json.optJSONArray("items").get(0);
 //				o11.put("equipement", o2);
-//				
 //				one.put("resp", o22);
-//				retour.put(0, one);
-				//3eme elem
-				
-
-			    val1 = new JSONObject();
-				val1.put("nom", "assensseur2");
-				val1.put("descr", "ce batiment est equipé d'un assensseur2");
-			    val2 = new JSONObject();
-				val2.put("nom", "porte");
-				val2.put("descr", "ce batiment a des portes larges2");
-				o2.put(0, val1);
-				o2.put(1, val2);
-				//voila la forme du json recu pour le 1er lien, il faut donc maintenant inserer l'info:
-//				JSONObject two = (JSONObject) json.optJSONObject("responseData").optJSONArray("results").get(1);
+//				//retour.put(0, one);
+//				
+//				JSONObject two = (JSONObject) json.optJSONArray("items").get(1);
 //				o22.put("equipement", o2);
-//				
 //				two.put("resp", o22);
-//				retour.put(1, two);
-				//retour.put(2, three);
-				//4eme elem
-				
-
-			    val1 = new JSONObject();
-				val1.put("nom", "assensseur4");
-				val1.put("descr", "ce batiment est equipé d'un assensseur4");
-			    val2 = new JSONObject();
-				val2.put("nom", "porte");
-				val2.put("descr", "ce batiment a des portes larges4");
-				o4.put(0, val1);
-				o4.put(1, val2);
-				//voila la forme du json recu pour le 1er lien, il faut donc maintenant inserer l'info:
-//				JSONObject four = (JSONObject) json.optJSONObject("responseData").optJSONArray("results").get(3);
-//				o44.put("equipement", o4);
+//				//retour.put(1, two);
 //				
+//				JSONObject three = (JSONObject) json.optJSONArray("items").get(2);
+//				o33.put("equipement", o3);
+//				three.put("resp", o33);
+//				//retour.put(2, three);
+//				
+//				JSONObject four = (JSONObject) json.optJSONArray("items").get(3);
+//				o44.put("equipement", o4);
 //				four.put("resp", o44);
-//				retour.put(3, four);
-				
-				
-				
-				JSONObject one = (JSONObject) json.optJSONArray("items").get(0);
-				o11.put("equipement", o2);
-				one.put("resp", o22);
-				//retour.put(0, one);
-				
-				JSONObject two = (JSONObject) json.optJSONArray("items").get(1);
-				o22.put("equipement", o2);
-				two.put("resp", o22);
-				//retour.put(1, two);
-				
-				JSONObject three = (JSONObject) json.optJSONArray("items").get(2);
-				o33.put("equipement", o3);
-				three.put("resp", o33);
-				//retour.put(2, three);
-				
-				JSONObject four = (JSONObject) json.optJSONArray("items").get(3);
-				o44.put("equipement", o4);
-				four.put("resp", o44);
-				//retour.put(3, four);
-				
-				JSONArray newitem = new JSONArray();
-				newitem.put(one);
-				newitem.put(two);
-				newitem.put(three);
-				newitem.put(four);
-				newitem.put(json.optJSONArray("items").get(4));
-				newitem.put(json.optJSONArray("items").get(5));
-				newitem.put(json.optJSONArray("items").get(6));
-				newitem.put(json.optJSONArray("items").get(7));
-				newitem.put(json.optJSONArray("items").get(8));
-				newitem.put(json.optJSONArray("items").get(9));
+//				//retour.put(3, four);
+//				
+//				JSONArray newitem = new JSONArray();
+//				newitem.put(one);
+//				newitem.put(two);
+//				newitem.put(three);
+//				newitem.put(four);
+//				newitem.put(json.optJSONArray("items").get(4));
+//				newitem.put(json.optJSONArray("items").get(5));
+//				newitem.put(json.optJSONArray("items").get(6));
+//				newitem.put(json.optJSONArray("items").get(7));
+//				newitem.put(json.optJSONArray("items").get(8));
+//				newitem.put(json.optJSONArray("items").get(9));
 				
 				
 //----------------------------------------------------------------------------------------------------------------------------------------------//				
-//          try {
-//                JSONArray newitem = new JSONArray();
-//                JSONObject valIni;
-//                
-//                url = new URL("https://handicacces.appspot.com/_ah/api/handicacces/v1/website");
-//              connection = url.openConnection();
-//              builder = new StringBuilder();
-//              reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
-//              while((line = reader.readLine()) != null) {
-//               builder.append(line);
-//              }
-//              JSONObject listeDesAmenagements = null;
-//              try {
-//                listeDesAmenagements = new JSONObject(builder.toString());
-//              } catch (JSONException e) {
-//                  // TODO Auto-generated catch block
-//                  //e.printStackTrace();
-//              }
-//                
-//                for(int i = 0; i < json.optJSONArray("items").length(); i++)
-//                {
-//                  
-//                  valIni = (JSONObject) json.optJSONArray("items").get(i);
-////                  url = new URL("https://handicacces.appspot.com/_ah/api/handicacces/v1/website/" + valIni.getString("displayLink"));
-////                    connection = url.openConnection();
-////                    builder = new StringBuilder();
-////                    reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
-////                    while((line = reader.readLine()) != null) {
-////                     builder.append(line);
-////                    }
-////                    JSONObject jsonEnrichit = null;
-////                    try {
-////                      jsonEnrichit = new JSONObject(builder.toString());
-////                    } catch (JSONException e) {
-////                        // TODO Auto-generated catch block
-////                        //e.printStackTrace();
-////                    }
-//                  JSONObject jsonEnrichit = null;
-//                  JSONArray listeVide = new JSONArray();
-//                  
-//                  int j = 0;
-//                  while(j < listeDesAmenagements.getJSONArray("items").length()) {
-//                    if(listeDesAmenagements.getJSONArray("items").getJSONObject(j).getString("url").compareTo(valIni.getString("displayLink")) ==0) {
-//                      jsonEnrichit = listeDesAmenagements.getJSONArray("items").getJSONObject(j);
-//                      j = listeDesAmenagements.getJSONArray("items").length() +2;
+
+			try {
+                JSONArray newitem = new JSONArray();
+                JSONObject valIni;
+                
+              URL url2 = new URL("https://handicacces.appspot.com/_ah/api/handicacces/v1/website");
+              URLConnection connection2 = url2.openConnection();
+//             builder = new StringBuilder();
+              String line2;
+              StringBuilder builder2 = new StringBuilder();
+//              inp.close();
+//              reader.close();
+              BufferedReader reader2 = new BufferedReader(new InputStreamReader(connection2.getInputStream(), "UTF-8"));
+              while((line2 = reader2.readLine()) != null) {
+//                out.println(line2);
+               builder2.append(line2);
+              }
+              JSONObject listeDesAmenagements = null;
+              try {
+                listeDesAmenagements = new JSONObject(builder2.toString());
+              } catch (JSONException e) {
+                  // TODO Auto-generated catch block
+                  //e.printStackTrace();
+              }
+
+//              out.println(listeDesAmenagements);
+//              out.println("----------");
+//              out.println(json);
+//              out.println("----------");
+//              out.print(json.getJSONArray("items").length());
+                for(int i = 0; i < json.getJSONArray("items").length(); i++)
+                {
+                  
+                  valIni = (JSONObject) json.getJSONArray("items").get(i);
+//                  url = new URL("https://handicacces.appspot.com/_ah/api/handicacces/v1/website/" + valIni.getString("displayLink"));
+//                    connection = url.openConnection();
+//                    builder = new StringBuilder();
+//                    reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+//                    while((line = reader.readLine()) != null) {
+//                     builder.append(line);
 //                    }
-//                  }
-//                  if(j == listeDesAmenagements.getJSONArray("items").length()) {
-//                    jsonEnrichit = new JSONObject();
-//                    jsonEnrichit.put("url", valIni.getString("displayLink"));
-//                    jsonEnrichit.put("layouts", listeVide);
+//                    JSONObject jsonEnrichit = null;
+//                    try {
+//                      jsonEnrichit = new JSONObject(builder.toString());
+//                    } catch (JSONException e) {
+//                        // TODO Auto-generated catch block
+//                        //e.printStackTrace();
 //                    }
-//                  valIni.put("resp", jsonEnrichit);
-//                  newitem.put(valIni);
-//                }
+                  JSONObject jsonEnrichit = null;
+                  JSONArray listeVide = new JSONArray();
+
+                  int j = 0;
+                  while(j < listeDesAmenagements.getJSONArray("items").length()) {
+                    if(listeDesAmenagements.getJSONArray("items").getJSONObject(j).getString("url").compareTo(valIni.getString("displayLink")) ==0) {
+                      jsonEnrichit = listeDesAmenagements.getJSONArray("items").getJSONObject(j);
+                      j = listeDesAmenagements.getJSONArray("items").length() +2;
+                    }
+                    j++;
+                  }
+                  if(j == listeDesAmenagements.getJSONArray("items").length()) {
+                    jsonEnrichit = new JSONObject();
+                    jsonEnrichit.put("url", valIni.getString("displayLink"));
+                    jsonEnrichit.put("layouts", listeVide);
+                    }
+                  valIni.put("resp", jsonEnrichit);
+                  newitem.put(valIni);
+                }
               //----------------------------------------------------------------------------------------------------------------------------------------------//  
                 
 				json.getJSONObject("responseData").remove("items");

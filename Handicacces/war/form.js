@@ -77,7 +77,7 @@ function affichage(){
 //			console.log(layout.checked);
 			if (layout.checked){
 				websiteAlancer = websiteAlancer + '{ "id": "' + layout.id +'", "name": "' + layout.name +'", "description": "' + layout.description +'", "checked": false},'
-				website.resp.equipement.push(layout);
+				website.resp.layouts.push(layout);
 			//website.utilisateurs.push({nom:'geof', annote:true})
 			} 
 		});
@@ -140,6 +140,7 @@ function affichage(){
 			
 			var temp = $scope.p1;
 			$http.get('http://handicacces.appspot.com/requete?p1=' + temp + '&start=1' ).success(function(response) {
+				console.log(response);
 				var json = response; 
 //				$scope.item = json.response;
 //				$scope.next = json.nextpage;
