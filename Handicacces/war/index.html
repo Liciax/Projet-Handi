@@ -64,14 +64,15 @@
         <form class="row" ng-controller="ResultController as resultat">
         <div class="col-md-12">
             <p>
-	            <input type="text" id="motclef" name="p1" size=20 style="width: 400px; height: 35px;" ng-model="p1"/>
+	            <input type="text" id="motclef" name="p1" size=20 style="width: 400px; height: 35px;" placeholder="Recherche" ng-model="p1"/>
 	            <!-- <input type="submit" value="Submit" ng-click="affresult()" /> -->
-	            <input type="submit" class="btn btn-md btn-primary" value="Rechercher" ng-click="affresult()" />
+	            <button type="submit" class="btn btn-md btn-primary"ng-click="affresult()"><span class="glyphicon glyphicon-search"> Rechercher</button>
+              </span>
             </p>   
        	</div> 
      
-		<button ng-show="item" class="btn btn-md btn-primary" ng-click="lastpage()">page precedente</button>
-		<button ng-show="item" class="btn btn-md btn-primary" ng-click="nextpage()">page suivante</button>
+		<button ng-show="item" class="btn btn-md btn-primary" ng-click="lastpage()"><span class="glyphicon glyphicon-backward"></span> Page précédente</button>
+		<button ng-show="item" class="btn btn-md btn-primary" ng-click="nextpage()">Page suivante <span class="glyphicon glyphicon-forward"></span></button>
 	   
        <div class="row" ng-repeat="result in item">
 	   
