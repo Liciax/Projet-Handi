@@ -25,106 +25,6 @@
     "maxAge" : 0
   },
   "methods" : {
-    "handicacces.removeWebsite" : {
-      "path" : "remove/{url}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.remove",
-      "request" : {
-        "parameters" : {
-          "url" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
-    "handicacces.updateWebsite" : {
-      "path" : "website",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.update",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "handicacces.createWebsite" : {
-      "path" : "create",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.create",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "handicacces.updateLayout" : {
-      "path" : "layout",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.updateLayout",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "handicacces.createLayout" : {
-      "path" : "createLayout",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.createLayout",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "handicacces.listAllWebsites" : {
-      "path" : "website",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.listWebsites",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "handicacces.removeLayout" : {
       "path" : "layout/{id}",
       "httpMethod" : "DELETE",
@@ -144,6 +44,42 @@
       },
       "response" : {
         "body" : "empty"
+      }
+    },
+    "handicacces.listAllWebsites" : {
+      "path" : "website",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.listWebsites",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "handicacces.listWebsitesByLayout" : {
+      "path" : "websitecollection/{id_layout}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.getWebsites",
+      "request" : {
+        "parameters" : {
+          "id_layout" : {
+            "type" : "int32",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
       }
     },
     "handicacces.getWebsite" : {
@@ -182,22 +118,86 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "handicacces.listWebsitesByLayout" : {
-      "path" : "websitecollection/{id_layout}",
-      "httpMethod" : "GET",
+    "handicacces.removeWebsite" : {
+      "path" : "remove/{url}",
+      "httpMethod" : "DELETE",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.getWebsites",
+      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.remove",
       "request" : {
         "parameters" : {
-          "id_layout" : {
-            "type" : "int32",
+          "url" : {
+            "type" : "string",
             "required" : true
           }
         },
         "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "handicacces.createWebsite" : {
+      "path" : "create",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.create",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "handicacces.updateWebsite" : {
+      "path" : "website",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.update",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "handicacces.updateLayout" : {
+      "path" : "layout",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.updateLayout",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "handicacces.createLayout" : {
+      "path" : "createLayout",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "fr.unantes.endpoints.WebsiteEndpoint.createLayout",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -266,9 +266,31 @@
       }
     },
     "methods" : {
+      "fr.unantes.endpoints.WebsiteEndpoint.removeLayout" : {
+      },
+      "fr.unantes.endpoints.WebsiteEndpoint.listWebsites" : {
+        "response" : {
+          "$ref" : "WebsiteCollection"
+        }
+      },
+      "fr.unantes.endpoints.WebsiteEndpoint.getWebsites" : {
+        "response" : {
+          "$ref" : "WebsiteCollection"
+        }
+      },
+      "fr.unantes.endpoints.WebsiteEndpoint.getWebsite" : {
+        "response" : {
+          "$ref" : "Website"
+        }
+      },
+      "fr.unantes.endpoints.WebsiteEndpoint.listLayouts" : {
+        "response" : {
+          "$ref" : "LayoutCollection"
+        }
+      },
       "fr.unantes.endpoints.WebsiteEndpoint.remove" : {
       },
-      "fr.unantes.endpoints.WebsiteEndpoint.update" : {
+      "fr.unantes.endpoints.WebsiteEndpoint.create" : {
         "request" : {
           "$ref" : "Website"
         },
@@ -276,7 +298,7 @@
           "$ref" : "Website"
         }
       },
-      "fr.unantes.endpoints.WebsiteEndpoint.create" : {
+      "fr.unantes.endpoints.WebsiteEndpoint.update" : {
         "request" : {
           "$ref" : "Website"
         },
@@ -298,28 +320,6 @@
         },
         "response" : {
           "$ref" : "Layout"
-        }
-      },
-      "fr.unantes.endpoints.WebsiteEndpoint.listWebsites" : {
-        "response" : {
-          "$ref" : "WebsiteCollection"
-        }
-      },
-      "fr.unantes.endpoints.WebsiteEndpoint.removeLayout" : {
-      },
-      "fr.unantes.endpoints.WebsiteEndpoint.getWebsite" : {
-        "response" : {
-          "$ref" : "Website"
-        }
-      },
-      "fr.unantes.endpoints.WebsiteEndpoint.listLayouts" : {
-        "response" : {
-          "$ref" : "LayoutCollection"
-        }
-      },
-      "fr.unantes.endpoints.WebsiteEndpoint.getWebsites" : {
-        "response" : {
-          "$ref" : "WebsiteCollection"
         }
       }
     }
