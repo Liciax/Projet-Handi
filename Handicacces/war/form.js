@@ -18,85 +18,57 @@ function affichage(){
 	var app = angular.module('app.search',['ngSanitize' ]);
 	app.controller("ResultController", ['$scope','$http', '$sce' ,function($scope,$http,$sce){
 	$scope.layouts = [];
-		/*
-		this.layouts = {
-			 "items": [
-			  {
-			   "id": "69",
-			   "name": "chien",
-			   "description": "geoffrou test",
-			   "checked": false,
-			   "kind": "handicacces#resourcesItem"
-			  },
-			  {
-			   "id": "999",
-			   "name": "iue",
-			   "description": "aq",
-			   "checked": false,
-			   "kind": "handicacces#resourcesItem"
-			  },
-			  {
-			   "id": "78987",
-			   "name": "test",
-			   "description": "test",
-			   "checked": false,
-			   "kind": "handicacces#resourcesItem"
-			  }
-			 ],
-			 "kind": "handicacces#resources",
-			 "etag": "\"CHoPyC7Dlwyk6eJbiwJsGs2RfVk/J3fMAf83xtTu1tO64V-OdJ200sM\""
-			}
-*/
-/*
-		var url = 'https://handicacces.appspot.com/_ah/api/handicacces/v1/layout'
-    	$http.get(url)
-					.success(function(datas){
-						this.layouts = datas;
-						console.log(datas); 
-      				})
-					.error(function(){
-						console.log("je n'arrive pas à charger les layouts"); 
-	  				}); 
-*/
 		 
 	$scope.renseigner = function(website,inflayout) {
-
-//		console.log(website.titleNoFormatting);
-//		console.log(layouts);
 		var newLayouts = inflayout;
 		var websiteAcreer = true;
-		if(website.hasOwnProperty('resp')){
+		if(website.resp.layouts.length > 0){
 			websiteAcreer = false;
 		}
-		
-//		console.log(newLayouts);
 		var websiteAlancer = '{ "url" : "' + website.displayLink + '" , "layouts" : [';
 		angular.forEach(newLayouts, function(layout) {
-//			console.log(website);
-//			console.log(layout);
-//			console.log(layout.checked);
 			if (layout.checked){
-				websiteAlancer = websiteAlancer + '{ "id": "' + layout.id +'", "name": "' + layout.name +'", "description": "' + layout.description +'", "checked": false},'
-				website.resp.layouts.push(layout);
-			//website.utilisateurs.push({nom:'geof', annote:true})
+				if(website.resp.layouts.length == 0) {
+					console.log("1");
+					websiteAlancer = websiteAlancer + '{ "id": "' + layout.id +'", "name": "' + layout.name +'", "description": "' + layout.description +'", "checked": false},'
+					website.resp.layouts.push(layout);
+				}
+				else {
+					console.log("2");
+					var pastrouve = true;
+					for(var nb = 0; nb < website.resp.layouts.length; nb++) {
+						if (layout.id == website.resp.layouts[nb].id) {
+							pastrouve = false;
+						}
+					}
+					if(pastrouve) {
+						websiteAlancer = websiteAlancer + '{ "id": "' + layout.id +'", "name": "' + layout.name +'", "description": "' + layout.description +'", "checked": false},'
+						website.resp.layouts.push(layout);
+					}
+				}
 			} 
 		});
-		websiteAlancer = websiteAlancer.substring(0, websiteAlancer.length - 1);
+		if(websiteAlancer.substr(websiteAlancer.length - 1) == ',') {
+			websiteAlancer = websiteAlancer.substring(0, websiteAlancer.length - 1);
+		}
 		websiteAlancer = websiteAlancer + ']}';
 		console.log(websiteAlancer);
 		var jsonAenvoyer = JSON.parse(websiteAlancer);
 		console.log(jsonAenvoyer);
-		if(websiteAcreer) {
-			$http.post("https://handicacces.appspot.com/_ah/api/handicacces/v1/create?fields=layouts%2Curl", jsonAenvoyer)
-			.success(function(data) {
-				console.log("ok crea");
-			});
-		} else {
-			$http.post("https://handicacces.appspot.com/_ah/api/handicacces/v1/website?fields=layouts%2Curl", jsonAenvoyer)
-			.success(function(data) {
-				console.log("ok");
-			});
+		if(jsonAenvoyer.layouts.length > 0) {
+			if(websiteAcreer) {
+				$http.post("https://handicacces.appspot.com/_ah/api/handicacces/v1/create?fields=layouts%2Curl", jsonAenvoyer)
+				.success(function(data) {
+					console.log("ok crea");
+				});
+			} else {
+				$http.put("https://handicacces.appspot.com/_ah/api/handicacces/v1/website?fields=layouts%2Curl", jsonAenvoyer)
+				.success(function(data) {
+					console.log("ok");
+				});
+			}
 		}
+		
 	};
 		
 		
@@ -121,14 +93,12 @@ function affichage(){
 		};
 		
 		
-		$scope.affresult = function(){	
-			console.log($scope.layouts); 
+		$scope.affresult = function(){
 			if($scope.layouts.length == 0 ){
 				var url = 'https://handicacces.appspot.com/_ah/api/handicacces/v1/layout'
 			    	$http.get(url)
 								.success(function(datas){
 									$scope.layouts = datas.items;
-//									console.log(datas.items); 
 			      				})
 								.error(function(){
 									console.log("je n'arrive pas à charger les layouts"); 
@@ -140,7 +110,6 @@ function affichage(){
 			
 			var temp = $scope.p1;
 			$http.get('http://handicacces.appspot.com/requete?p1=' + temp + '&start=1' ).success(function(response) {
-				console.log(response);
 				var json = response; 
 //				$scope.item = json.response;
 //				$scope.next = json.nextpage;
