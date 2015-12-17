@@ -1,6 +1,10 @@
 @charset "utf-8";
 /* CSS Document */
 
+.popover {
+   	width:800px;
+}
+
 li{
 	list-style:none;
 }

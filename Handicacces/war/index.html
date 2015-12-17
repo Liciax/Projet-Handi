@@ -4,16 +4,19 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	
-  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-  	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-sanitize.js"></script>
-  	
-	  <script type="text/javascript" src="form.js"></script>
+  	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-sanitize.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="form.js"></script>
+	<script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	
     <title>Handicacces</title>
 
     <!-- Bootstrap -->
-	<link href="bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet">
+	<link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- My style -->
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 
@@ -30,7 +33,7 @@
 
   <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-	  <div class="container-fluid">
+	  <div class="container">
 	    <div class="navbar-header">
 	      <a class="navbar-brand" href="#">Handicacces</a>
 	    </div>
@@ -39,11 +42,17 @@
 	        <li><a href="http://handicacces.appspot.com">Accueil</a></li>
 	        <li><a href="http://github.com/Liciax/Projet-Handi.git">
 	        <img src="images/logoGithub.png" alt="logo Github" style="width:25px;height:25px;">Répertoire Github</a></li> 
-	      </ul>
+        	<li><a href="#" data-toggle="popover" title="A propos" data-placement="bottom" data-trigger="focus" 
+        	data-content="Cette application a pour objectif d'aider les personnes en situation de handicaps dans leur recherches de sites web. Lorsque vous faites une recherche sur un restaurant ou un hotêl par exemple, vous pourrez spécifier les aménagements disponibles sur ce lieu.">A propos</a></li>
+        	</ul>
 	    </div>
 	  </div>
 	</nav>
-
+		<script>
+		$(document).ready(function(){
+		    $('[data-toggle="popover"]').popover();   
+		});
+		</script>
     <div class="container">
       <div class="row">
         <h1 class="col-md-12">HANDICACCES</h1>
@@ -123,10 +132,6 @@
 	  </footer>
 	   -->
     </div><!-- /.container -->
-
-
-    <!-- Bootstrap javascript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    
   </body>
 </html>
