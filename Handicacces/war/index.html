@@ -75,6 +75,7 @@
 		<button ng-show="item" class="btn btn-md btn-primary" ng-click="lastpage()"><span class="glyphicon glyphicon-backward"></span> Page précédente</button>
 		<button ng-show="item" class="btn btn-md btn-primary" ng-click="nextpage()">Page suivante <span class="glyphicon glyphicon-forward"></span></button>
 	   
+	   <div class="container">
        <div class="row" ng-repeat="result in item">
 	   
 	   			<h3 ng-bind-html="result.htmlTitle"></h3>
@@ -85,6 +86,7 @@
 		        
 		        
 		        <!-- -------------------------------------------------------------------------- -->
+		        
 		        <div class="annotations" >
 		        	<ul>
 		        		
@@ -113,11 +115,12 @@
 							<!-- Fin du formulaire de renseignement --> 
 					
 						</li>
-						<li class="old_annotations" ng-repeat="info in result.resp.layouts">{{info.name}}</li>
+						<li class="old_annotations" ng-repeat="info in result.resp.layouts"><span class="label label-success">{{info.name}}</span></li>
 					</ul>
 		        </div>
 	        	<!-- -------------------------------------------------------------------------- -->
-	        </div>
+	     </div>
+	     </div>
 	        
        </form>
     </div>
