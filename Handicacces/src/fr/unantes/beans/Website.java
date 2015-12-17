@@ -47,7 +47,7 @@ public class Website {
 
 	public boolean contains(Layout layout){
 		for(Layout each : this.layouts){
-			if(each.equals(layout)){
+			if(each.getId() == layout.getId()){
 				return true;
 			}
 		}

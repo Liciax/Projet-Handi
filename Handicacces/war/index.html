@@ -87,8 +87,8 @@
 		        <!-- -------------------------------------------------------------------------- -->
 		        <div class="annotations" >
 		        	<ul>
-		        		<li class="old_annotations" ng-repeat="info in result.resp.layouts">{{info.name}}</li>
-<!-- 		        		<li class="old_annotations" ng-repeat="info in result.resp.layouts">{{info.name}}</li> -->
+		        		
+
 		       			<li class="old_annotations">
 							<div ng-class="{active:resultat.isSelected(result)}"> 
 								<a href ng-click="resultat.selectTab(result)" class="ajout"><img src="images/add.png" class="add_more"></a> 
@@ -102,9 +102,8 @@
 								<ul id="formulaire" >
 									<form>
 										<li class="choix" ng-repeat="layout in layouts">
-
-											<input type="checkbox" ng-model="layout.checked">
-											<span ng-model="layout.name">{{layout.name}}</span> <a href="" class="help" title="{{layout.description}}">?</a> </li>
+										<input type="checkbox" ng-model="layout.checked">
+										<span ng-model="layout.name">{{layout.name}}</span> <a href="" class="help" title="{{layout.description}}">?</a> </li>
 										<li>
 											<input type="submit" name="Submit" value="Valider" class="valider" ng-click="renseigner(result,layouts)">
 										</li>
@@ -114,24 +113,14 @@
 							<!-- Fin du formulaire de renseignement --> 
 					
 						</li>
+						<li class="old_annotations" ng-repeat="info in result.resp.layouts">{{info.name}}</li>
 					</ul>
 		        </div>
 	        	<!-- -------------------------------------------------------------------------- -->
-<!-- 	        <div ng-repeat="result in item"> -->
-<!-- 		        <h1>{{result.titleNoFormatting}}</h1> -->
-<!-- 		        <a ng-href="{{result.unescapedUrl}}">{{result.unescapedUrl}}</a> -->
-<!-- 		        <h2>{{result.url}}</h2> -->
-<!-- 		        <p>{{result.content}}</p> -->
 	        </div>
 	        
        </form>
-       
-       <!-- 
-        <footer class="row">
-	  	<p class="col-md-12">&copy Copyright 2015 - Projet Master ALMA</p>
-	  </footer>
-	   -->
-    </div><!-- /.container -->
+    </div>
     
   </body>
 </html>

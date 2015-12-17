@@ -9,11 +9,9 @@ import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.datastore.Cursor;
 import com.googlecode.objectify.NotFoundException;
 
-import fr.unantes.beans.Amenagement;
 import fr.unantes.beans.Layout;
 import fr.unantes.beans.User;
 import fr.unantes.beans.Website;
-import fr.unantes.repositories.AmenagementRepository;
 import fr.unantes.repositories.LayoutRepository;
 import fr.unantes.repositories.WebsiteRepository;
 
@@ -65,12 +63,12 @@ public class WebsiteEndpoint {
 	 public Collection<Website> listWebsites() {
 	  return WebsiteRepository.getInstance().findWebsites();
 	 }
-	 
+	 /*
 	 @ApiMethod(name = "ListWebsitesByLayout", httpMethod = ApiMethod.HttpMethod.GET)
 	 public Collection<Website> getWebsites(@Named("id_layout") int id_layout)  throws UnauthorizedException{
 	  return WebsiteRepository.getInstance().findWebsitesByAmenagements(id_layout);
 	 }
-	 
+	 */
 	 @ApiMethod(name = "GetWebsite", httpMethod = ApiMethod.HttpMethod.GET)
 	 public Website getWebsite(@Named("url")String url) {
 	  return WebsiteRepository.getInstance().findWebsiteByURL(url);	 
