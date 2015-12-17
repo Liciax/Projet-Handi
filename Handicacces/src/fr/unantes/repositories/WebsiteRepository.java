@@ -60,7 +60,6 @@ public class WebsiteRepository {
 	if(ofy().load().type(Website.class).id(url).now() != null){
 		throw new Exception("Site web deja existant");
 	}
-
 		 ofy().save().entity(website).now();
 		 return website;
 	 }
@@ -72,9 +71,9 @@ public class WebsiteRepository {
 		 if (url == null) {
 			   throw new Exception("Website innexistant");
 		 }
-
-		Website website = ofy().load().key(Key.create(Website.class, editedWebsite.getUrl())).now();
-		for(Layout each : website.getLayouts()){
+		List<Layout> liste = editedWebsite.getLayouts();
+		Website website = ofy().load().type(Website.class).id(url).now();
+		for(Layout each : liste){
 			if(!website.contains(each)){
 				website.getLayouts().add(each);
 			}
